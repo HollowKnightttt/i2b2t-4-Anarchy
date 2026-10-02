@@ -22,11 +22,11 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
         }
 
         val player = event.player
-        val playerLocale = player.locale().toString()
         val world = player.world
 
         if (world.environment == World.Environment.NETHER){
             if (to.y > 127 && plugin.block_nether_roof){
+                val playerLocale = player.locale().toString()
                 val loc = Location(world, to.x, 120.0, to.z)
                 player.teleport(loc)
                 if (playerLocale.startsWith("es") && plugin.spanish_enabled){
@@ -38,6 +38,7 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
                 plugin.logToConsole("<yellow>${player.name} tried to access Nether Roof.")
             }
             else if (to.y < 0 && plugin.patch_vclip_exploit) {
+                val playerLocale = player.locale().toString()
                 val isElytraEnabled = player.inventory.chestplate?.type == Material.ELYTRA && plugin.patch_vclip_exploit_mode == "ELYTRA"
                 val isStrictEnabled = plugin.patch_vclip_exploit_mode == "STRICT"
 
