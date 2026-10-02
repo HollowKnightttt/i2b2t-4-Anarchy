@@ -266,7 +266,7 @@ class Toms3Core : JavaPlugin() {
                     }
                 }
             }
-        }, 0L, announcements_interval)
+        }, announcements_interval, announcements_interval)
     }
 
     fun stopAnnouncements(){
