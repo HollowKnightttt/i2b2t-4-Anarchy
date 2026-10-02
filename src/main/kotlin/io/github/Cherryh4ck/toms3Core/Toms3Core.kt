@@ -136,7 +136,20 @@ class Toms3Core : JavaPlugin() {
     }
 
     override fun onDisable() {
-        // Plugin shutdown logic
+        for (player in Bukkit.getOnlinePlayers()) {
+            val playerData = File(playerDataPath, "${player.name.lowercase()}.yml")
+            val config = YamlConfiguration.loadConfiguration(playerData)
+            val now = System.currentTimeMillis()
+            config.set("last-seen", now)
+            try {
+                config.save(playerData)
+                if (cache_system_logging_enabled){
+                    logToConsole("<green>Last seen date updated for ${player.name}.")
+                }
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
     }
 
     fun logToConsole(message: String) {
