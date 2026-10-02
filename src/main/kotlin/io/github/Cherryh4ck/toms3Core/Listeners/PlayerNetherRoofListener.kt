@@ -9,6 +9,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 import org.bukkit.event.vehicle.VehicleMoveEvent
 
 class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
@@ -67,6 +68,20 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
 
         if (world.environment == World.Environment.NETHER){
             doChecks(from, to, player, world)
+        }
+    }
+
+    @EventHandler
+    fun onPlayerTeleport(event: PlayerTeleportEvent) {
+        val from = event.from
+        val to = event.to ?: return
+
+        val targetWorld = to.world ?: return
+        if (targetWorld.environment == World.Environment.NETHER) {
+            if (from.blockY == to.blockY) {
+                return
+            }
+            doChecks(from, to, event.player, targetWorld)
         }
     }
 
