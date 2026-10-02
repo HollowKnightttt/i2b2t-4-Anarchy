@@ -1,7 +1,8 @@
 package io.github.Cherryh4ck.toms3Core.Listeners
 
 import io.github.Cherryh4ck.toms3Core.Toms3Core
-import org.bukkit.Material
+import org.bukkit.block.Block
+import org.bukkit.block.TileState
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
@@ -14,7 +15,7 @@ class BlockPlaceListener(private val plugin: Toms3Core) : Listener {
         val block = event.block
         val chunk = block.chunk
 
-        if (isATileEntity(block.type) && plugin.chunklimits_enable){
+        if (isATileEntity(block) && plugin.chunklimits_enable){
             val count = chunk.getTileEntities(false).size
             val maxCount = plugin.tile_entities_limit
 
@@ -44,17 +45,7 @@ class BlockPlaceListener(private val plugin: Toms3Core) : Listener {
         }
     }
 
-    private val TILE_ENTITIES = setOf(
-        Material.CHEST, Material.ENDER_CHEST, Material.TRAPPED_CHEST,
-        Material.BARREL, Material.COPPER_CHEST, Material.DISPENSER,
-        Material.DROPPER, Material.HOPPER, Material.FURNACE,
-        Material.BLAST_FURNACE, Material.SMOKER, Material.BEACON,
-        Material.ENCHANTING_TABLE
-    )
-    fun isATileEntity(material: Material): Boolean {
-        if (!material.isBlock) return false
-
-        return material in TILE_ENTITIES || material.name.contains("SHULKER_BOX")
-                || material.name.contains("SIGN")
+    fun isATileEntity(block: Block): Boolean {
+        return block.getState(false) is TileState
     }
 }
