@@ -15,7 +15,7 @@ class BlockPlaceListener(private val plugin: Toms3Core) : Listener {
         val chunk = block.chunk
 
         if (isATileEntity(block.type) && plugin.chunklimits_enable){
-            val count = chunk.tileEntities.size
+            val count = chunk.getTileEntities(false).size
             val maxCount = plugin.tile_entities_limit
 
             if (count > maxCount){
