@@ -79,11 +79,13 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
             return
         }
 
-        val player = vehicle.passengers.filterIsInstance<Player>().firstOrNull()
-        if (player != null) {
-            val world = player.world
-            if (world.environment == World.Environment.NETHER){
-                doChecks(from, to, player, world)
+        val world = vehicle.world
+        if (world.environment == World.Environment.NETHER) {
+            if (to.y > 127 && plugin.block_nether_roof){
+                vehicle.remove()
+            }
+            else if (to.y < 0  && plugin.patch_vclip_exploit) {
+                vehicle.remove()
             }
         }
     }
