@@ -327,7 +327,6 @@ class Toms3Core : JavaPlugin() {
             }
             "reload" -> {
                 reloadPlugin()
-                isConfigUpdated()
                 mensaje = minimessage.deserialize("$prefix <gold>Plugin reloaded.</gold>")
                 sender.sendMessage(mensaje)
             }
