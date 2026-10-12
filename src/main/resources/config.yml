@@ -126,7 +126,7 @@ misc:
   # Simple announcements system, create as many as you want
   # Selection is purely random and repeated announcements can appear again.
   announcements:
-    enable: true
+    enable: false
     # Time in seconds
     timer: 60
     messages:
