@@ -378,10 +378,17 @@ class Toms3Core : JavaPlugin() {
                 }
 
                 val uuidString = args[1]
-                val uuid: UUID = UUID.fromString(uuidString)
+                var uuid: UUID
+                try {
+                    uuid = UUID.fromString(uuidString)
+                }
+                catch (e: Exception) {
+                    mensaje = minimessage.deserialize("$prefix <red>This player has never entered the server or is not in the server cache.</red>")
+                    sender.sendMessage(mensaje)
+                    return true
+                }
 
                 val offlineplayer = getOfflinePlayer(uuid)
-
                 if (!offlineplayer.isOnline && offlineplayer.firstPlayed == 0L) {
                     mensaje = minimessage.deserialize("$prefix <red>This player has never entered the server or is not in the server cache.</red>")
                     sender.sendMessage(mensaje)
