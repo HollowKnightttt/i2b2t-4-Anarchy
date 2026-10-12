@@ -89,12 +89,12 @@ class Toms3Core : JavaPlugin() {
 
     var announcements_enabled = config.getBoolean("misc.announcements.enable")
     var announcements_timer = config.getInt("misc.announcements.timer")
-    var announcements_interval = (20 * announcements_timer).toLong()
+    var announcements_interval = (20 * announcements_timer).toLong().coerceAtLeast(1)
     var announcements = config.getConfigurationSection("misc.announcements.messages")
 
     var emergent_announcements_enabled = config.getBoolean("misc.emergent-announcements.enable")
     var emergent_announcements_timer = config.getInt("misc.emergent-announcements.timer")
-    var emergent_announcements_interval = (20 * emergent_announcements_timer).toLong()
+    var emergent_announcements_interval = (20 * emergent_announcements_timer).toLong().coerceAtLeast(1)
     var emergent_announcements = config.getConfigurationSection("misc.emergent-announcements.messages")
     val playerDataPath = File(dataFolder, "playerdata")
 
@@ -213,10 +213,10 @@ class Toms3Core : JavaPlugin() {
         actionbar_announcement_es = config.getString("misc.join-events.join-action-bar-message.es")
         announcements_enabled = config.getBoolean("misc.announcements.enable")
         announcements_timer = config.getInt("misc.announcements.timer")
-        announcements_interval = (20 * announcements_timer).toLong()
+        announcements_interval = (20 * announcements_timer).toLong().coerceAtLeast(1)
         announcements = config.getConfigurationSection("misc.announcements.messages")
         emergent_announcements_enabled = config.getBoolean("misc.emergent-announcements.enable")
-        emergent_announcements_timer = config.getInt("misc.emergent-announcements.timer")
+        emergent_announcements_timer = config.getInt("misc.emergent-announcements.timer").coerceAtLeast(1)
         emergent_announcements_interval = (20 * emergent_announcements_timer).toLong()
         emergent_announcements = config.getConfigurationSection("misc.emergent-announcements.messages")
 
