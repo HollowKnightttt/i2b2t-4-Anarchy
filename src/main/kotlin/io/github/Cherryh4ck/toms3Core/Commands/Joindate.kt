@@ -63,7 +63,7 @@ class Joindate(private val plugin: Toms3Core) : TabExecutor {
         }
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
-            val playerDataCache = File(plugin.playerDataPath, "${targetUser.lowercase()}.yml")
+            val playerDataCache = plugin.playerDataFile(targetUser) ?: return@Runnable
             val offlineplayer = if (!playerDataCache.exists()) {
                 plugin.logToConsole("<red>$targetUser's UUID file doesn't exist.")
                 Bukkit.getOfflinePlayer(targetUser)

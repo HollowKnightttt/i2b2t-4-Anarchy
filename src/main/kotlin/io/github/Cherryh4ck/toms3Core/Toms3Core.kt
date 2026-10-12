@@ -138,7 +138,7 @@ class Toms3Core : JavaPlugin() {
 
     override fun onDisable() {
         for (player in Bukkit.getOnlinePlayers()) {
-            val playerData = File(playerDataPath, "${player.name.lowercase()}.yml")
+            val playerData = playerDataFile(player.name) ?: continue
             val config = YamlConfiguration.loadConfiguration(playerData)
             val now = System.currentTimeMillis()
             config.set("last-seen", now)
@@ -307,6 +307,11 @@ class Toms3Core : JavaPlugin() {
         emergentAnnouncementsTask = null
     }
 
+    fun playerDataFile(name: String): File? {
+        val file = File(playerDataPath, "${name.lowercase()}.yml")
+        return if (file.canonicalFile.parentFile == playerDataPath.canonicalFile) file else null
+    }
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val mensaje : Component
         if(args.isEmpty()){
@@ -340,7 +345,7 @@ class Toms3Core : JavaPlugin() {
                     args[1]
                 }
                 Bukkit.getScheduler().runTaskAsynchronously(this, Runnable {
-                    val playerDataCache = File(playerDataPath, "${targetUser.lowercase()}.yml")
+                    val playerDataCache = playerDataFile(targetUser) ?: return@Runnable
                     val offlineplayer = if (!playerDataCache.exists()) {
                         logToConsole("<red>$targetUser's UUID file doesn't exist.")
                         getOfflinePlayer(targetUser)

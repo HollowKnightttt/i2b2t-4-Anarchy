@@ -16,7 +16,7 @@ class ToggleAnnouncements(private val plugin : Toms3Core) : TabExecutor {
             val locale = sender.locale().toString()
             val isSpanish = locale.startsWith("es")
             Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
-                val playerData = File(plugin.playerDataPath, "${sender.name.lowercase()}.yml")
+                val playerData = plugin.playerDataFile(sender.name) ?: return@Runnable
                 val config = YamlConfiguration.loadConfiguration(playerData)
                 val toggle = config.getBoolean("toggle-announcements")
                 config.set("toggle-announcements", !toggle)
