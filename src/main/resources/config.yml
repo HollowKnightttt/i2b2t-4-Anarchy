@@ -47,6 +47,8 @@ utilities:
   op-command-blacklist:
     enable: false
     blacklisted-commands:
+      - "execute"
+      - "minecraft:execute"
       - "ban"
       - "minecraft:ban"
 
