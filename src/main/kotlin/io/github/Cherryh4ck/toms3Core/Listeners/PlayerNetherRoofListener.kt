@@ -78,9 +78,6 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
 
         val targetWorld = to.world ?: return
         if (targetWorld.environment == World.Environment.NETHER) {
-            if (from.blockY == to.blockY) {
-                return
-            }
             doChecks(from, to, event.player, targetWorld)
         }
     }
