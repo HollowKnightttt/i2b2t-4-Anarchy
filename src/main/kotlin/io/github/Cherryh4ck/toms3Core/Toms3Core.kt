@@ -61,7 +61,7 @@ class Toms3Core : JavaPlugin() {
     var toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")
     var toggleannouncements_message_off_es = config.getString("commands.toggleannouncements.message.off.es")
 
-    var op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands")
+    var op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands").map { it.lowercase() }
 
     var tile_entities_limit = config.getInt("chunk-limits.tile-entities.entity-limit")
     var tile_entities_log = config.getBoolean("chunk-limits.tile-entities.log")
@@ -192,7 +192,7 @@ class Toms3Core : JavaPlugin() {
         toggleannouncements_message_on_es = config.getString("commands.toggleannouncements.message.on.es")
         toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")
         toggleannouncements_message_off_es = config.getString("commands.toggleannouncements.message.off.es")
-        op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands")
+        op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands").map { it.lowercase() }
         chunklimits_enable = config.getBoolean("chunk-limits.enable")
         tile_entities_limit = config.getInt("chunk-limits.tile-entities.entity-limit")
         tile_entities_log = config.getBoolean("chunk-limits.tile-entities.log")
