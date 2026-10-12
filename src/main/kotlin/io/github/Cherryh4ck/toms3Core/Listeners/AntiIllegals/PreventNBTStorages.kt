@@ -28,7 +28,8 @@ class PreventNBTStorages : Listener {
         Material.FURNACE,
         Material.SMOKER,
         Material.HOPPER,
-        Material.BLAST_FURNACE
+        Material.BLAST_FURNACE,
+        Material.BREWING_STAND,
     )
 
     fun checkItem(item: ItemStack) : Boolean{
