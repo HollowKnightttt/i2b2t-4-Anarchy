@@ -29,6 +29,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 import java.io.File
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 
 class Toms3Core : JavaPlugin() {
     // -- IMPORTANT --
@@ -98,7 +99,7 @@ class Toms3Core : JavaPlugin() {
     val playerDataPath = File(dataFolder, "playerdata")
 
     // Lists
-    var haveAnnouncementsDisabled = HashSet<UUID>()
+    val haveAnnouncementsDisabled: MutableSet<UUID> = ConcurrentHashMap.newKeySet()
 
     override fun onEnable() {
         logger.info("---------------------")
