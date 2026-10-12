@@ -34,3 +34,8 @@ commands:
     description: Toggles announcements
     usage: /toggleannouncements
     aliases: toggleann
+
+permissions:
+  tmcore.main:
+    description: Toms3Core main command permission
+    default: op
