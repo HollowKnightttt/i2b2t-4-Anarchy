@@ -6,7 +6,6 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import java.io.File
 
 class CachePlayerJoinListener(private val plugin: Toms3Core) : Listener {
     @EventHandler

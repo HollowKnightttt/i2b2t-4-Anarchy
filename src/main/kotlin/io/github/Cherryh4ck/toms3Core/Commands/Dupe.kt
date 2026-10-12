@@ -13,7 +13,6 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.io.File
 
 class Dupe(private val plugin : Toms3Core) : TabExecutor {
     val minimessage = MiniMessage.miniMessage()
