@@ -16,69 +16,59 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
     // Cheap patch for VClip travel exploit
     // also prevents players from being killed by the void damage thing on the nether roof
 
-    private fun doChecks(from: Location, to: Location, player: Player, world: World) {
-        if (to.y > 127 && plugin.block_nether_roof){
-            val playerLocale = player.locale().toString()
-            val loc = Location(world, to.x, 120.0, to.z)
-            if (player.isInsideVehicle) {
-                player.leaveVehicle()
-            }
-            player.teleport(loc)
-            if (playerLocale.startsWith("es") && plugin.spanish_enabled){
+    private fun doChecks(to: Location, player: Player): Boolean {
+        val playerLocale = player.locale().toString()
+        val isSpanish = playerLocale.startsWith("es") && plugin.spanish_enabled
+
+        if (to.y > 127 && plugin.block_nether_roof) {
+            if (isSpanish) {
                 player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} El techo del Nether está deshabilitado."))
-            }
-            else{
+            } else {
                 player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} Nether Roof is currently disabled."))
             }
             plugin.logToConsole("<yellow>${player.name} tried to access Nether Roof.")
+            return true
         }
-        else if (to.y < 0 && plugin.patch_vclip_exploit) {
-            val playerLocale = player.locale().toString()
+
+        if (to.y < 0 && plugin.patch_vclip_exploit) {
             val isElytraEnabled = player.inventory.chestplate?.type == Material.ELYTRA && plugin.patch_vclip_exploit_mode == "ELYTRA"
             val isStrictEnabled = plugin.patch_vclip_exploit_mode == "STRICT"
 
-            if (isElytraEnabled || isStrictEnabled){
-                val loc = Location(world, to.x, 7.0, to.z)
-                if (player.isInsideVehicle) {
-                    player.leaveVehicle()
-                }
-                player.teleport(loc)
-                if (playerLocale.startsWith("es") && plugin.spanish_enabled){
+            if (isElytraEnabled || isStrictEnabled) {
+                if (isSpanish) {
                     player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} No se pueden usar las elytras debajo de la bedrock debido a un exploit."))
-                }
-                else{
+                } else {
                     player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} This travel exploit is currently disabled."))
                 }
                 plugin.logToConsole("<yellow>${player.name} tried to execute the VClip exploit.")
+                return true
             }
         }
+
+        return false
     }
 
     @EventHandler
     fun onPlayerMove(event: PlayerMoveEvent) {
         val from = event.from
-        val to = event.to ?: return
-
-        if (from.blockY == to.blockY) {
-            return
-        }
+        val to = event.to
+        if (from.blockY == to.blockY) return
 
         val player = event.player
-        val world = player.world
+        if (player.world.environment != World.Environment.NETHER) return
 
-        if (world.environment == World.Environment.NETHER){
-            doChecks(from, to, player, world)
+        if (doChecks(to, player)) {
+            event.isCancelled = true
         }
     }
 
     @EventHandler
     fun onPlayerTeleport(event: PlayerTeleportEvent) {
-        val from = event.from
-        val to = event.to ?: return
+        val to = event.to
+        if (to.world.environment != World.Environment.NETHER) return
 
-        val targetWorld = to.world ?: return
-        if (targetWorld.environment == World.Environment.NETHER) {
-            doChecks(from, to, event.player, targetWorld)
+        if (doChecks(to, event.player)) {
+            event.isCancelled = true
         }
     }
 
