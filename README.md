@@ -4,7 +4,7 @@ An Plugin For Anarchy Minecraft Server
 - IP: i2b2t.jo3.org
 - Port: 46265
 - Both Java And Bedrock
-- Website: (I2B2T Official Website)[https://i2b2t.fwh.is/?i=1]
+- Website: [I2B2T Official Website](https://i2b2t.fwh.is/?i=1)
 # Feature
 - Joke Commands:
 - /dupe, And /seed
