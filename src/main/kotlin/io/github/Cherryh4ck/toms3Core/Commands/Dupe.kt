@@ -49,10 +49,10 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
             val hallOfShameMessage = if (isSpanish && plugin.spanish_enabled) { minimessage.deserialize("<red>Ahora estás en la lista de jugadores lamentables.</red>") } else { minimessage.deserialize("<red>You have been added to the Hall of Shame.</red>") }
             sender.sendMessage(joinMessage)
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                sender.sendMessage("${sender.name} » popbob my coords are ${sender.x.toInt().toString()} ${sender.z.toInt().toString()} come get me please")
+                sender.sendMessage("${sender.name} » popbob pls give me free illegal item please")
             }, 20L)
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                sender.sendMessage("popbob » ur fucked, im coming")
+                sender.sendMessage("popbob » **** no im going to kill you ur cooked")
                 val health = sender.health - 1.0
                 sender.damage(health)
                 sender.addPotionEffect(drunkness)
@@ -90,7 +90,7 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
             })
         }
         else{
-            plugin.logToConsole("<red>You must be a player to execute this command.")
+            plugin.logToConsole("OMG A GHOST AHHHHH (you must be a player to executive this command.)")
         }
         return true
     }
