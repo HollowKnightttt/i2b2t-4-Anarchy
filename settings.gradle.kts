@@ -1,1 +1,1 @@
-rootProject.name = "Toms3Core"
+rootProject.name = "i2b2t 4 Anarchy"
