@@ -24,7 +24,7 @@ commands:
   # le popbob coming for you!!!1111
   dupe:
     # Message sent to the discord webhook
-    discord-webhook-message: "%username% is probably missing a lot of neurons"
+    discord-webhook-message: "%username% is using /dupe think it will work"
   # Vote command (/vote)
   # Has no actual use more than displaying a message.
   vote:
@@ -77,7 +77,22 @@ illegals:
     list:
       - BEDROCK
       - SPAWNER
-  # Prevents and deletes any type of storage with nbt data in it
+      - END_GATEWAY
+      - BUDDING_AMETHYST
+      - FIRE
+      - SOUL_FIRE
+      - COMMAND_BLOCK
+      - REPEATING_COMMAND_BLOCK
+      - CHAIN_COMMAND_BLOCK
+      # If your server has geyser enable these
+      # - WATER
+      # - LAVA
+      # - GLOWING_OBSIDIAN
+      # - ALLOW
+      # - DENY
+      # - TILE.DEPRECATED_PURPUR_BLOCK_2.NAME
+      # - TILE.CLIENT_REQUEST_PLACEHOLDER_BLOCK.NAME
+  # prevents and deletes any type of storage with nbt data in it
   # Checks are really strict as it also checks shulkers, it may slightly hurt performance!!
   # You shouldn't enable this unless your server suffers from illegals / admin abuse
   # NBT Storages were used in toms3.cc to crash the whole server by spamming and breaking them
