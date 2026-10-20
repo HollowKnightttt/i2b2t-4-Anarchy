@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BlockStateMeta
 
+// "exploiter is much smarter than you think" -- randommizerrr
 class PreventNBTStorages : Listener {
     val storageTypes = setOf(
         Material.CHEST,
@@ -30,6 +31,10 @@ class PreventNBTStorages : Listener {
         Material.HOPPER,
         Material.BLAST_FURNACE,
         Material.BREWING_STAND,
+        Material.SHULKER_BOX, 
+        Material.DROPPER, // an fucking dropper btw
+        Material.DISPENSER // someone use this to bypass toms3core btw
+        // Material.LIT_FURNACE
     )
 
     fun checkItem(item: ItemStack) : Boolean{
