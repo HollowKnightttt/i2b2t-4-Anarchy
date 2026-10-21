@@ -34,6 +34,9 @@ commands:
     description: Toggles announcements
     usage: /toggleannouncements
     aliases: toggleann
+  Suicide:
+    description: Good If You Get Trapped TRANS LIFE MATTER
+    usage: /suicide
 
 permissions:
   tmcore.main:
